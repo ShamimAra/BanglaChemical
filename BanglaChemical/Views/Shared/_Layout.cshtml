@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>@ViewBag.Title</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Welcome to Bangla Chemical" />
+        <link rel="shortcut icon" href="../Image/favicon.ico" type="image/x-icon" />
+
+        <!-- css Link -->
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/ace.css")
+        @Styles.Render("~/Content/font-awesome.css")
+        @Styles.Render("~/Content/date-picker.css")
+        @Styles.Render("~/Content/data-table-button.css")
+        @Styles.Render("~/Content/data-tables.css")
+        @Styles.Render("~/Content/select.css")
+        @Styles.Render("~/Content/sweet-alert.css")
+        @Styles.Render("~/Content/bootstrap.css")
+        @Styles.Render("~/Content/jquery-ui.css")
+        @Styles.Render("~/Content/custom.css")
+
+        <style>
+            .requiredicon::after {
+                content: "*";
+                right: -10px;
+                top: 6px;
+                border: 0px solid;
+                position: absolute;
+                color: #ff0000;
+                font-size: 20px;
+                float: right;
+            }
+        </style>
+
+        <!-- js Link -->
+
+        @Scripts.Render("~/Scripts/jquery-2.1.4.min.js")
+        @Scripts.Render("~/Scripts/ace.js")
+        @Scripts.Render("~/Scripts/ace-elements.js")
+        @Scripts.Render("~/Scripts/bootstrap.js")
+        @Scripts.Render("~/Scripts/superplaceholder.min.js")
+        @Scripts.Render("~/Scripts/jquery.validate.min.js")
+        @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+        @Scripts.Render("~/Scripts/select.js")
+        @Scripts.Render("~/Scripts/date-picker.js")
+        @Scripts.Render("~/Scripts/data-tables.js")
+        @Scripts.Render("~/Scripts/sweet-alert.js")
+    </head>
+
+    <body class="no-skin">
+        @RenderPage("~/Views/Shared/Header.cshtml")
+
+        <div class="main-container ace-save-state" id="main-container" style="margin-top: -20px;">
+            @RenderPage("~/Views/Shared/Nav.cshtml")
+            @RenderBody()
+            @RenderPage("~/Views/Shared/Footer.cshtml")
+        </div>
+
+        <div id="loader" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <img src="@Url.Content("~/Image/AjaxLoader.gif")" class="img-responsive" style="margin:0 auto">
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(".select_search").select2();
+
+            var table = $('.data_table').DataTable({
+                "lengthMenu": [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
+                "columnDefs": [{ "orderable": false, "targets": "_all" }],
+                "ordering": false
+            });
+        </script>
+
+        <script>
+            $('.date_picker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true,
+                endDate: '+0d'
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+
+            $('input[type="text"]').attr('autocomplete', 'off');
+            $('input[type="email"]').attr('autocomplete', 'off');
+            $('input[type="password"]').attr('autocomplete', 'off');
+
+            function isNumber(event) {
+                var key = window.event ? event.keyCode : event.which;
+                if (event.keyCode === 8 || event.keyCode === 46) {
+                    return true;
+                } else if (key < 48 || key > 57) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        </script>
+
+        @Scripts.Render("~/Scripts/custom.js")
+        @RenderSection("scripts", required: false)
+
+    </body>
+
+</html>

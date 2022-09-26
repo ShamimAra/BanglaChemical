@@ -1,0 +1,158 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Offer";
+
+    string userCode = string.Empty;
+    DataTable dtLoginData = new DataTable();
+
+    if (Session["dtLoginData"] != null)
+    {
+        dtLoginData = (DataTable)Session["dtLoginData"];
+    }
+
+    if (dtLoginData.Rows.Count > 0)
+    {
+        ViewBag.userCode = Convert.ToString(dtLoginData.Rows[0]["USER_CODE"]);
+        ViewBag.userrollid = Convert.ToString(dtLoginData.Rows[0]["ROLE_ID"]);
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <input type="hidden" id="user_code" value="@(ViewBag.userCode)">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Offer
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Offer
+                    </small>
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend> Offer from Supplier</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon order_date" for="requisition_date"> Date:</label>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker requisition_date" type="text" id="requisition_date" name="requisition_date" data-date-format="dd/mm/yyyy" placeholder="Example: DD/MM/YYYY" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="address">Address:</label>
+                                <div class="col-sm-9">
+                                    <textarea name="address" id="address" class="address form-control" rows="4" cols="3" placeholder="Address" style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="attention">Attention:</label>
+                                <div class="col-sm-9">
+                                    <textarea name="attention" id="attention" class="attention form-control" rows="4" cols="3" placeholder="Attention" style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="subject">Sub:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="subject" id="subject" class="subject form-control" placeholder="Example: Subject" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="body">Body:</label>
+                                <div class="col-sm-9">
+                                    <textarea name="body" id="body" class="body form-control" rows="4" cols="3" placeholder="Body" style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="commodity">Commodity:</label>
+                                <div class="col-sm-3">
+                                    <select name="commodity" id="commodity" class="col-xs-12 col-sm-12 commodity select_search form-control">
+                                        <option value="">Select Commodity</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="quantity">Quantity:</label>
+                                <div class="col-sm-3">
+                                    <select name="quantity" id="quantity" class="col-xs-12 col-sm-12 quantity select_search form-control">
+                                        <option value="">Select Quantity</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="supplier">Supplier:</label>
+                                <div class="col-sm-3">
+                                    <select name="supplier" id="supplier" class="col-xs-12 col-sm-12 supplier select_search form-control">
+                                        <option value="">Select Supplier</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="origin">Origin:</label>
+                                <div class="col-sm-3">
+                                    <select name="origin" id="origin" class="col-xs-12 col-sm-12 supplier select_search form-control">
+                                        <option value="">Select Origin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="payment">Payment:</label>
+                                <div class="col-sm-3">
+                                    <select name="payment" id="payment" class="col-xs-12 col-sm-12 payment select_search form-control">
+                                        <option value="">Select Payment</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="package">Package:</label>
+                                <div class="col-sm-3">
+                                    <select name="package" id="package" class="col-xs-12 col-sm-12 package select_search form-control">
+                                        <option value="">Select Package</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="shipment">Shipment:</label>
+                                <div class="col-sm-3">
+                                    <select name="shipment" id="shipment" class="col-xs-12 col-sm-12 shipment select_search form-control">
+                                        <option value="">Select Shipment</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="validity">Validity:</label>
+                                <div class="col-sm-3">
+                                    <select name="validity" id="validity" class="col-xs-12 col-sm-12 validity select_search form-control">
+                                        <option value="">Select Validity</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="footer">Footer:</label>
+                                <div class="col-sm-9">
+                                    <textarea name="footer" id="footer" class="footer form-control" rows="4" cols="3" placeholder="Footer" style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" class="btn btn-sm btn-success" id="btnSave"><i class="fa fa-check-square-o"></i> Save</button>
+                                    <button type="button" id="btnReset" class="btn btn-rounded btn-sm btn-purple"><span class="fa fa-refresh"></span> Clear</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Currency";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Currency
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Currency Information
+                    </small>
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-horizontal" id="form_input" role="form">
+
+                        <div class="form-group">
+                            <input type="hidden" class="cur_id" id="cur_id" value="" />
+                            <input type="hidden" class="cur_code" id="cur_code" value="" />
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="cur_desc">Currency:</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="cur_desc" id="cur_desc" class="col-xs-12 col-sm-12 cur_desc" value="" maxlength="3" placeholder="Example: BDT">
+                            </div>
+                        </div>
+
+                        <div class="form-group hidden">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="cur_origin_code">Currency Origin Code:</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="cur_origin_code" id="cur_origin_code" class="col-xs-12 col-sm-12 cur_origin_code" value="" maxlength="3" placeholder="Example: 123">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="cur_symbol">Currency Symbol:</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="cur_symbol" id="cur_symbol" class="col-xs-12 col-sm-12 cur_symbol" value="" placeholder="Example: $">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="submit" class="btn btn-sm btn-success" id="savecurrency"><i class="fa fa-check-square-o"></i> Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-condensed table-hover data_table">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th>Currency</th>
+                                    <th class="hidden">Currency Origin Code </th>
+                                    <th class="hidden">Currency Symbol</th>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th style="text-align: center;" id="action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit_form" class="modal edit_form" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:820px;">
+            <div class="modal-header">
+                <h4 class="blue bigger">
+                    Currency
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Currency Edit
+                    </small>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+
+                        <div class="form-horizontal" role="form" id="form_input" style="width:788px;">
+                            <div class="form-group">
+                                <input type="hidden" class="cur_id" id="cur_id" value="" />
+                                <input type="hidden" class="cur_code" id="cur_code" value="" />
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_cur_desc">Currency:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="edit_cur_desc" id="edit_cur_desc" class="col-xs-12 col-sm-12 edit_cur_desc" value="" maxlength="3" placeholder="Example: BDT">
+                                </div>
+                            </div>
+                            <div class="form-group hidden">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_cur_origin_code">Currency Origin Code:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="edit_cur_origin_code" id="edit_cur_origin_code" class="col-xs-12 col-sm-12 edit_cur_origin_code" value="" maxlength="3" placeholder="Example: 123">
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="edit_cur_symbol">Currency Symbol:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="edit_cur_symbol" id="edit_cur_symbol" class="col-xs-12 col-sm-12 edit_cur_symbol" value="" placeholder="Example: $">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <input type="hidden" id="editing_row" />
+                                    <div class="space-4"></div>
+
+                                    <button class="btn btn-sm btn-danger" data-dismiss="modal">
+                                        <i class="ace-icon fa fa-times"></i> Cancel
+                                    </button>
+
+                                    <button class="btn btn-sm btn-primary" id="updatecurrency">
+                                        <i class="ace-icon fa fa-check"></i> Update
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

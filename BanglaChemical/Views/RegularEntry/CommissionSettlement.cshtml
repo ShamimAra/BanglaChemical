@@ -1,0 +1,129 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Commission Settlement";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">          
+            <div class="page-header">
+                <h1>
+                    Commission Settlement
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Commission Settlement
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend> Commission Settlement Entry</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <input type="hidden" name="sales_order_id" id="sales_order_id" class="sales_order_id" value="0" />
+                            <input type="hidden" name="sales_order_code" id="sales_order_code" class="sales_order_code" value="0" />
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon order_date" for="requisition_date"> Commission Settlement Date:</label>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker requisition_date" type="text" id="requisition_date" name="requisition_date" data-date-format="dd/mm/yyyy" placeholder="Example: DD/MM/YYYY" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="requisition_number">Commission Settlement Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="requisition_number" id="requisition_number" class="col-xs-3 form-control requisition_number" placeholder="Example: Commission Settlement Number" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="system_generated_requisition_number">System Generated Commission Settlement Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="system_generated_requisition_number" id="system_generated_requisition_number" class="col-xs-3  form-control system_generated_requisition_number" placeholder="Example: System Generated Commission Settlement Number" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="customer_organization">Customer Organization:</label>
+                                <div class="col-sm-3">
+                                    <select name="customer_organization" id="customer_organization" class="col-xs-12 col-sm-12 customer_organization select_search form-control">
+                                        <option value="">Select Customer Organization</option>
+                                        
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="shipment">Shipment:</label>
+                                <div class="col-sm-3">
+                                    <select name="shipment" id="shipment" class="col-xs-12 col-sm-12 shipment select_search form-control">
+                                        <option value="">Select Shipment</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="customer_organization">Supplier:</label>
+                                <div class="col-sm-3">
+                                    <select name="customer_organization" id="customer_organization" class="col-xs-12 col-sm-12 customer_organization select_search form-control">
+                                        <option value="">Select Supplier</option>
+
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="shipment">Shipment Method:</label>
+                                <div class="col-sm-3">
+                                    <select name="shipment" id="shipment" class="col-xs-12 col-sm-12 shipment select_search form-control">
+                                        <option value="">Select Shipment Method</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="requisition_number">L/C Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="requisition_number" id="requisition_number" class="col-xs-3 form-control requisition_number" placeholder="Example: L/C Number" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="requisition_number">Freight Value:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="requisition_number" id="requisition_number" class="col-xs-3 form-control requisition_number" placeholder="Example: Freight Value" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" class="btn btn-sm btn-success" id="btnSave"><i class="fa fa-check-square-o"></i> Save</button>
+                                    <button type="button" id="btnReset" class="btn btn-rounded btn-sm btn-purple"><span class="fa fa-refresh"></span> Clear</button>
+                                    <button type="button" id="btnDelete" class="btn btn-rounded btn-sm btn-danger" style="display:none" onclick="removeData();"><i class="fa fa-trash"></i> Delete</button>
+                                    @using (Html.BeginForm("FiberSaleReportDownload", "FiberSaleReport", FormMethod.Post, new { @style = "display:inline", target = "_blank" }))
+                                    {
+                                        <input type="hidden" name="comp_name" id="comp_name" class="comp_name" value="" />
+                                        <input type="hidden" name="sale_number" id="sale_number" class="sale_number" value="" />
+                                        <button type="submit" id="btnReport" class="btn btn-rounded btn-sm btn-primary" style="display:none" target="_blank"><i class="fa fa-file-pdf-o"></i> Report</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #table_data .select2-container {
+        width: 300px !important;
+    }
+
+    #table_data input[type="text"] {
+        width: 200px !important;
+    }
+</style>
+
+
+
+

@@ -1,0 +1,206 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Supplier Order";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Supplier Order
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Supplier Order
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend>Search/ Update Supplier Order</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="search_supplier_order_number">Supplier Order Number:</label>
+                                <div class="col-sm-6">
+                                    <select name="search_supplier_order_number" id="search_supplier_order_number" class="col-xs-12 col-sm-12 search_supplier_order_number select_search form-control">
+                                        <option value="">Select Supplier Order Number</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="search_supplier_order_date">Supplier Order Date:</label>
+                                <div class="col-sm-3">
+                                    <select name="search_supplier_order_date" id="search_supplier_order_date" class="col-xs-12 col-sm-12 search_supplier_order_date select_search" disabled>
+                                        <option value="">Select Supplier Order Date</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" id="btnFind" class="btn btn-sm btn-rounded btn-info btnFindDetail"><i class="fa fa-search"></i> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend> Supplier Order Entry</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <input type="hidden" name="sales_order_id" id="sales_order_id" class="sales_order_id" value="0" />
+                            <input type="hidden" name="sales_order_code" id="sales_order_code" class="sales_order_code" value="0" />
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon order_date" for="requisition_date"> Supplier Order Date:</label>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker requisition_date" type="text" id="requisition_date" name="requisition_date" data-date-format="dd/mm/yyyy" placeholder="Example: DD/MM/YYYY" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="supplier">Supplier:</label>
+                                <div class="col-sm-3">
+                                    <select name="supplier" id="supplier" class="col-xs-12 col-sm-12 supplier select_search form-control">
+                                        <option value="">Select Supplier</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="requisition_number">Supplier Order Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="requisition_number" id="requisition_number" class="col-xs-3 form-control requisition_number" placeholder="Example: Supplier Order Number" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="system_generated_requisition_number">System Generated Supplier Order Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="system_generated_requisition_number" id="system_generated_requisition_number" class="col-xs-3  form-control system_generated_requisition_number" placeholder="Example: System Generated Supplier Order Number" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="shipment">Shipment:</label>
+                                <div class="col-sm-3">
+                                    <select name="shipment" id="shipment" class="col-xs-12 col-sm-12 shipment select_search form-control">
+                                        <option value="">Select Shipment</option>
+
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="shipment_method">Shipment Method:</label>
+                                <div class="col-sm-3">
+                                    <select name="shipment_method" id="shipment_method" class="col-xs-12 col-sm-12 shipment_method select_search form-control">
+                                        <option value="">Select Shipment Method</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="lc_negotiation">L/C Negotiation:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="lc_negotiation" id="lc_negotiation" class="col-xs-3 lc_negotiation form-control" placeholder="Example: L/C Negotiation" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="offer_number">Offer Number:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="offer_number" id="offer_number" class="col-xs-3 offer_number form-control" placeholder="Example: Offer Number" />
+                                </div>
+                            </div>
+                          
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" class="btn btn-sm btn-success" id="btnSave"><i class="fa fa-check-square-o"></i> Save</button>
+                                    <button type="button" id="btnReset" class="btn btn-rounded btn-sm btn-purple"><span class="fa fa-refresh"></span> Clear</button>
+                                    <button type="button" id="btnDelete" class="btn btn-rounded btn-sm btn-danger" style="display:none" onclick="removeData();"><i class="fa fa-trash"></i> Delete</button>
+                                    @using (Html.BeginForm("FiberSaleReportDownload", "FiberSaleReport", FormMethod.Post, new { @style = "display:inline", target = "_blank" }))
+                                    {
+                                        <input type="hidden" name="comp_name" id="comp_name" class="comp_name" value="" />
+                                        <input type="hidden" name="sale_number" id="sale_number" class="sale_number" value="" />
+                                        <button type="submit" id="btnReport" class="btn btn-rounded btn-sm btn-primary" style="display:none" target="_blank"><i class="fa fa-file-pdf-o"></i> Report</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <h4 style="border:1px solid #ddd; padding:5px;margin-bottom:0px;background:yellowgreen" class="fiber_sale_detail">Customer Inquiry Detail Entry</h4>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-hover table-condensed table_data">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th><input type="checkbox" class="check_all_Table_row" value="0" /></th>
+                                    <th>Item Name <span style="color:red">*</span></th>
+                                    <th>Item Spec</th>
+                                    <th>Measurement Unit <span style="color:red">*</span></th>
+                                    <th>Item Quantity <span style="color:red">*</span></th>
+                                    <th>Unit Price</th>
+                                    <th>Total Amount</th>
+                                    <th>Packaging</th>
+                                    <th>HS Code</th>
+                                    <th class="hidden"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body" class="table_body">
+                                <tr class="detail_target_field">
+                                    <td class="hidden"> <input type='hidden' name='order_dtl_id' id='order_dtl_id' class='form-control order_dtl_id' value='0' disabled> </td>
+                                    <td><input type="checkbox" class="thisCheckTableRow this_check" name="thisCheckTableRow" onclick="checkSingleRow(1);" value="0" /></td>
+                                    <td>
+                                        <select name='item_name' id='item_name' class='select_search form-control item_name'>
+                                            <option value=''>Select Item</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name='item_spec' id='item_spec' class='form-control item_spec' value='' /></td>
+                                    <td>
+                                        <select name='measurement_unit' id='measurement_unit' class='select_search form-control measurement_unit' disabled>
+                                            <option value=''>Select Measurement Unit</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name='item_quantity' id='item_quantity' class='form-control item_quantity placeholder_left input_right' onkeypress='return isNumber(event)' value='0'></td>
+                                    <td><input type="text" name='unit_price' id='unit_price' class='form-control unit_price placeholder_left input_right' onkeypress='return isNumber(event)' value='0'></td>
+                                    <td><input type="text" name='total_amount' id='total_amount' class='form-control total_amount placeholder_left input_right' onkeypress='return isNumber(event)' value='0'></td>
+                                    <td><input type="text" name='packaging' id='packaging' class='form-control packaging' value='' /></td>
+                                    <td><input type="text" name='hs_code' id='hs_code' class='form-control hs_code' onkeypress='return isNumber(event)' value='0'></td>
+                                    <td class="hidden"><input type="hidden" name="detail_row_status" id="detail_row_status" class="form-control detail_row_status" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-xs-12 col-md-3 col-md-3 col-lg-3'>
+                    <button type="button" id="deleteTableRow" class="btn btn-rounded btn-sm btn-danger deleteTableRow"><i class="fa fa-minus"></i> Delete</button>
+                    <button type="button" id="addTableRow" class="btn btn-rounded btn-sm btn-info addTableRow"><i class="fa fa-plus"></i> Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #table_data .select2-container {
+        width: 300px !important;
+    }
+
+    #table_data input[type="text"] {
+        width: 200px !important;
+    }
+</style>
+
+
+
+

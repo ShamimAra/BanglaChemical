@@ -1,0 +1,442 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Item";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Item
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Item Entry
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-horizontal" id="form_input" role="form">
+
+                        <div class="form-group">
+                            <input type="hidden" name="item_id" id="item_id" class="col-xs-12 col-sm-12 item_id hidden" value="0">
+                            <input type="hidden" name="item_code" id="item_code" class="col-xs-12 col-sm-12 item_code hidden" value="">
+
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="item_desc"> Item Name: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="item_desc" id="item_desc" class="col-xs-12 col-sm-12 item_desc" value="" placeholder="Example: Foil">
+                            </div>
+
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="item_type"> Item Type: </label>
+                            <div class="col-sm-3">
+                                <select name="item_type" id="item_type" class="col-xs-12 col-sm-12 select_search item_type" @*style="background:#FFFF00"*@>
+                                    <option value=""> Select Item Type</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="cat_desc"> Category: </label>
+                            <div class="col-sm-3">
+                                <select name="cat_desc" id="cat_desc" class="col-xs-12 col-sm-12 cat_desc select_search">
+                                    <option value=""> Select Item Category</option>
+                                   
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="subcat_desc"> Sub Category: </label>
+                            <div class="col-sm-3">
+                                <select name="subcat_desc" id="subcat_desc" class="col-xs-12 col-sm-12 subcat_desc select_search">
+                                    <option value=""> Select Sub Category</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="msr_unit"> Measurement Unit: </label>
+                            <div class="col-sm-3">
+                                <select name="msr_unit" id="msr_unit" class="col-xs-12 col-sm-12 msr_unit select_search">
+                                    <option value=""> Select Measurement Unit</option>
+                                   
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="item_part_no"> Part Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="item_part_no" id="item_part_no" class="col-xs-12 col-sm-12 item_part_no" value="" maxlength="50" placeholder="Example: 49844887">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="reorder_qty"> Reorder Quantity: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="reorder_qty" id="reorder_qty" class="col-xs-12 col-sm-12 reorder_qty" value="" placeholder="Example: 200" onkeypress="return isNumber(event)">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="item_size"> Size: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="item_size" id="item_size" class="col-xs-12 col-sm-12 item_size" value="" maxlength="50" placeholder="Example: 500kg">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="item_color1"> Color 1: </label>
+                            <div class="col-sm-3">
+                                <select name="item_color1" id="item_color1" class="col-xs-12 col-sm-12 item_color1 select_search">
+                                    <option value=""> Select Color 1</option>
+                                   
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="item_color2"> Color 2: </label>
+                            <div class="col-sm-3">
+                                <select name="item_color2" id="item_color2" class="col-xs-12 col-sm-12 item_color2 select_search">
+                                    <option value=""> Select Color 2</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="item_color3"> Color 3: </label>
+                            <div class="col-sm-3">
+                                <select name="item_color3" id="item_color3" class="col-xs-12 col-sm-12 item_color3 select_search">
+                                    <option value=""> Select Color 3</option>
+                                    
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="hs_code"> HS Code: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="hs_code" id="hs_code" class="col-xs-12 col-sm-12 hs_code" value="" placeholder="Example: 4873" onkeypress="return isNumber(event)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="spec1"> Spec 1: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="spec1" id="spec1" class="col-xs-12 col-sm-12 spec1" value="" placeholder="Example: 200 gsm">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="spec2"> Spec 2: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="spec2" id="spec2" class="col-xs-12 col-sm-12 spec2" value="" maxlength="200" placeholder="Example: 500kg">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="itemImageSource1"> Image 1: </label>
+                            <div class="col-sm-3">
+                                <label for="itemImage1">
+                                    <img id="itemImageSource1" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                    <i class="fa fa-plus" id="upload_icon_1" style="position: relative;left: -116px;"></i>
+                                    <input type="file" id="itemImage1" style="display:none" accept="image/*" onchange="checkPhoto1(this)">
+                                </label>
+                                <input type="hidden" id="itemImageValue1" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="spec3"> Spec 3: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="spec3" id="spec3" class="col-xs-12 col-sm-12 spec3" value="" placeholder="Example: 200 gsm">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="itemImageSource2"> Image 2: </label>
+                            <div class="col-sm-3">
+                                <label for="itemImage2">
+                                    <img id="itemImageSource2" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                    <i class="fa fa-plus" id="upload_icon_2" style="position: relative;left: -116px;"></i>
+                                    <input type="file" id="itemImage2" style="display:none" accept="image/*" onchange="checkPhoto2(this)">
+                                </label>
+                                <input type="hidden" id="itemImageValue2" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="itemImageSource3"> Image 3: </label>
+                            <div class="col-sm-3">
+                                <label for="itemImage3">
+                                    <img id="itemImageSource3" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                    <i class="fa fa-plus" id="upload_icon_3" style="position: relative;left: -116px;"></i>
+                                    <input type="file" id="itemImage3" style="display:none" accept="image/*" onchange="checkPhoto3(this)" >
+                                </label>
+                                <input type="hidden" id="itemImageValue3" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="submit" class="btn btn-sm btn-success" id="saveData"><i class="fa fa-check-square-o"></i> Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            @*Show data in table*@
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-condensed table-hover">
+                            <thead>
+                                <tr>                                    
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th>Item Name</th>
+                                    <th class="hidden"></th>
+                                    <th>Item Type</th>
+                                    <th class="hidden"></th>
+                                    <th>Category</th>
+                                    <th class="hidden"></th>
+                                    <th>Sub Category</th>
+                                    <th class="hidden"></th>
+                                    <th>Measurement Unit</th>
+                                    <th>Part Number</th>
+                                    <th>Reorder Quantity</th>
+                                    <th>Size</th>
+                                    <th class="hidden"></th>
+                                    <th>Color 1</th>
+                                    <th class="hidden"></th>
+                                    <th>Color 2</th>
+                                    <th class="hidden"></th>
+                                    <th>Color 3</th>
+                                    <th>HS Code</th>
+                                    <th>Spec 1</th>
+                                    <th>Spec 2</th>
+                                    <th>Spec 3</th>                                    
+                                    <th style="text-align: center; border: 1px solid #ddd;" id="action">Action</th> 
+                                    <th class="hidden">SERIALNO</th>                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            @*edit ItemEntry info*@
+            <div id="edit_form" class="modal edit_form" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width:910px; right: 10px;">
+                        <div class="modal-header">
+                            <h4 class="blue bigger">
+                                Item
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Item Entry Edit
+                                </small>
+                            </h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-horizontal" id="form_input" role="form">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_item_desc"> Item Name: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_item_desc" id="edit_item_desc" class="col-xs-12 col-sm-12 edit_item_desc" value="" placeholder="Example: Foil">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_item_type"> Item Type: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_item_type" id="edit_item_type" class="col-xs-12 col-sm-12 select_search edit_item_type" @*style="background:#FFFF00"*@>
+                                                    <option value=""> Select Item Type</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_cat_desc"> Category: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_cat_desc" id="edit_cat_desc" class="col-xs-12 col-sm-12 edit_cat_desc select_search">
+                                                    <option value=""> Select Item Category</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_subcat_desc"> Sub Category: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_subcat_desc" id="edit_subcat_desc" class="col-xs-12 col-sm-12 edit_subcat_desc select_search">
+                                                    <option value=""> Select Sub Category</option>
+                                                   
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_msr_unit"> Measurement Unit: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_msr_unit" id="edit_msr_unit" class="col-xs-12 col-sm-12 edit_msr_unit select_search">
+                                                    <option value=""> Select Measurement Unit</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_item_part_no"> Part Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_item_part_no" id="edit_item_part_no" class="col-xs-12 col-sm-12 edit_item_part_no" value="" maxlength="50" placeholder="Example: 49844887">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_reorder_qty"> Reorder Quantity: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_reorder_qty" id="edit_reorder_qty" class="col-xs-12 col-sm-12 edit_reorder_qty" value="" placeholder="Example: 200" onkeypress="return isNumber(event)">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_item_size"> Size: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_item_size" id="edit_item_size" class="col-xs-12 col-sm-12 edit_item_size" value="" maxlength="50" placeholder="Example: 500kg">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_item_color1"> Color 1: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_item_color1" id="edit_item_color1" class="col-xs-12 col-sm-12 edit_item_color1 select_search">
+                                                    <option value=""> Select Color 1</option>
+                                                   
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_item_color2"> Color 2: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_item_color2" id="edit_item_color2" class="col-xs-12 col-sm-12 edit_item_color2 select_search">
+                                                    <option value=""> Select Color 2</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_item_color3"> Color 3: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_item_color3" id="edit_item_color3" class="col-xs-12 col-sm-12 edit_item_color3 select_search">
+                                                    <option value=""> Select Color 3</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_hs_code"> HS Code: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_hs_code" id="edit_hs_code" class="col-xs-12 col-sm-12 edit_hs_code" value="" placeholder="Example: 4873" onkeypress="return isNumber(event)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_spec1"> Spec 1: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_spec1" id="edit_spec1" class="col-xs-12 col-sm-12 edit_spec1" value="" placeholder="Example: 200 gsm">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_spec2"> Spec 2: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_spec2" id="edit_spec2" class="col-xs-12 col-sm-12 edit_spec2" value="" maxlength="200" placeholder="Example: 500kg">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_spec3"> Spec 3: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_spec3" id="edit_spec3" class="col-xs-12 col-sm-12 edit_spec3" value="" placeholder="Example: 200 gsm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <input type="hidden" id="editing_row" />
+                                            <div class="space-4"></div>
+
+                                            <button class="btn btn-sm btn-danger" data-dismiss="modal">
+                                                <i class="ace-icon fa fa-times"></i> Cancel
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" id="updateItem">
+                                                <i class="ace-icon fa fa-check"></i> Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Show Images*@
+            <div id="edit_images" class="modal edit_form" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width:910px; right: 10px;">
+                        <div class="modal-header">
+                            <h4 class="blue bigger">
+                                Item
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Show Item Images
+                                </small>
+                            </h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <input type="hidden" name="show_item_code" id="show_item_code" class="col-xs-12 col-sm-12 show_item_code hidden" value="">
+                                            <label class="col-sm-3 control-label no-padding-right" for="showitemImageSource1"> Item Image 1: </label>
+                                            <div class="col-sm-3">
+                                                <label for="showitemImage1">
+                                                    <img id="showitemImageSource1" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                                    <i class="fa fa-plus" id="edit_upload_icon_1" style="position: relative;left: 95px; top: -75px;"></i>
+                                                    <input type="file" id="showitemImage1" style="display:none" accept="image/*" onchange="editcheckPhoto1(this)">
+                                                </label>
+                                                <input type="hidden" id="showitemImageValue1" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="showitemImageSource2"> Item Image 2: </label>
+                                            <div class="col-sm-3">
+                                                <label for="showitemImage2">
+                                                    <img id="showitemImageSource2" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                                    <i class="fa fa-plus" id="edit_upload_icon_2" style="position: relative;left: 95px; top: -75px;"></i>
+                                                    <input type="file" id="showitemImage2" style="display:none" accept="image/*" onchange="editcheckPhoto2(this)">
+                                                </label>
+                                                <input type="hidden" id="showitemImageValue2" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="showitemImageSource3"> Item Image 3: </label>
+                                            <div class="col-sm-3">
+                                                <label for="showitemImage3">
+                                                    <img id="showitemImageSource3" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                                    <i class="fa fa-plus" id="edit_upload_icon_3" style="position: relative;left: 95px; top: -75px;"></i>
+                                                    <input type="file" id="showitemImage3" style="display:none" accept="image/*" onchange="editcheckPhoto3(this)">
+                                                </label>
+                                                <input type="hidden" id="showitemImageValue3" @*onchange="encodedbpointFileAsURLOne();"*@ value="">
+                                            </div>
+                                        </div>
+                                       
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <input type="hidden" id="editing_row" />
+                                            <div class="space-4"></div>
+
+                                            <button class="btn btn-sm btn-danger" data-dismiss="modal">
+                                                <i class="ace-icon fa fa-times"></i> Cancel
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" id="updateItemImages">
+                                                <i class="ace-icon fa fa-check"></i> Ok
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

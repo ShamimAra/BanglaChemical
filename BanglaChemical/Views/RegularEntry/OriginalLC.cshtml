@@ -1,0 +1,376 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Original L/C";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Original L/C
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Original L/C
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend>Search/ Update Original L/C</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <div class="form-group">
+                                <input type="hidden" id="lc_master_id" class="form-control lc_master_id" value="0" />
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="purchase_no">LC No:</label>
+                                <div class="col-sm-9">
+                                    <select name="lc_no" id="lc_no" class="form-control lc_no select_search">
+                                        <option value="">Select LC No</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="search_lc_date">LC Date:</label>
+                                <div class="col-sm-3">
+                                    <select name="search_lc_date" id="search_lc_date" class="form-control search_lc_date select_search" disabled>
+                                        <option value="">Select LC Date</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" id="btnFind" class="btn btn-rounded btn-info btnFindDetail"><i class="fa fa-search"></i> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <fieldset>
+                        <legend> Original L/C Entry</legend>
+                        <div class="form-horizontal" id="form_input" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="lc_user_no">System Generated LC No:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="lc_user_no" id="lc_user_no" class="col-xs-12 col-sm-12 lc_user_no form-control" placeholder="Example: LC-01" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="lc_number">LC No:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="lc_number" id="lc_number" class="col-xs-12 col-sm-12 lc_number form-control" placeholder="Example: 101/EW/2001/111" value="" maxlength="100" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="lc_date">LC Date:</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker lc_date" type="text" id="lc_date" name="lc_date" data-date-format="dd/mm/yyyy" placeholder="Example: 04/12/2018" />
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="exp_date">LC Expired Date:</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker exp_date" type="text" id="exp_date" name="exp_date" data-date-format="dd/mm/yyyy" placeholder="Example: 04/12/2024" />
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="sup_list">Supplier Name:</label>
+                                <div class="col-md-3">
+                                    <select name="sup_list" id="sup_list" class="col-xs-12 col-sm-12 sup_list select_search form-control">
+                                        <option value="">Select Supplier Name</option>
+                                      
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="lc_memo_no">LC Memo No:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="lc_memo_no" id="lc_memo_no" class="col-xs-12 col-sm-12 lc_memo_no form-control" placeholder="Example: LC-01" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="lc_memo_date">LC Memo Date:</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker" type="text" id="lc_memo_date" name="lc_memo_date" data-date-format="dd/mm/yyyy" placeholder="Example: 04/12/2018" />
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="landing_port">Landing Port Name:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="landing_port" id="landing_port" class="col-xs-12 col-sm-12 landing_port form-control" placeholder="Example: Chattagram" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="shipment_port">Shipment Port Name:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="shipment_port" id="shipment_port" class="col-xs-12 col-sm-12 shipment_port form-control" placeholder="Example: Kalkata" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="shipment_mode">Shipment Mode:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="shipment_mode" id="shipment_mode" class="col-xs-12 col-sm-12 shipment_mode form-control" placeholder="Example: Air" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="local_agent">Local Agent Name:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="local_agent" id="local_agent" class="col-xs-12 col-sm-12 local_agent form-control" placeholder="Example: M/S Enterprise" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="packing_value">Packing Value:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="packing_value" id="packing_value" class="col-xs-12 col-sm-12 packing_value form-control" placeholder="Example: 5000" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="freight_value">Freight Value:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="freight_value" id="freight_value" class="col-xs-12 col-sm-12 freight_value form-control" placeholder="Example: 500" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="margin_lc_no">Margin for LC:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="margin_lc_no" id="margin_lc_no" class="col-xs-12 col-sm-12 margin_lc_no form-control" placeholder="Example: 9869" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="charge_decucted_lcno">Charges Deducted for LC:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="charge_decucted_lcno" id="charge_decucted_lcno" class="col-xs-12 col-sm-12 charge_decucted_lcno form-control" placeholder="Example: 80001" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="stamp_hand_deducted">Stamp on Hand for LC:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="stamp_hand_deducted" id="stamp_hand_deducted" class="col-xs-12 col-sm-12 stamp_hand_deducted form-control" placeholder="Example: 5001" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="vat_swift_charge_deducted">Vat on SWIFT Charge:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="vat_swift_charge_deducted" id="vat_swift_charge_deducted" class="col-xs-12 col-sm-12 vat_swift_charge_deducted form-control" placeholder="Example: 50100" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="swift_charge_import">SWIFT Charge Import:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="swift_charge_import" id="swift_charge_import" class="col-xs-12 col-sm-12 swift_charge_import form-control" placeholder="Example: 20855" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="others_fees_commision">Others Fees and Commission:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="others_fees_commision" id="others_fees_commision" class="col-xs-12 col-sm-12 others_fees_commision form-control" placeholder="Example: 1920" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="vat_others_fees_com">Vat on Others Fees and Commission:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="vat_others_fees_com" id="vat_others_fees_com" class="col-xs-12 col-sm-12 vat_others_fees_com form-control" placeholder="Example: 1086" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="coommission_lc_import">Commission on LC Import-Foreign:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="coommission_lc_import" id="coommission_lc_import" class="col-xs-12 col-sm-12 coommission_lc_import form-control" placeholder="Example: 98520" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="vat_lc_import_foreign">Vat on LC Import-Foreign:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="vat_lc_import_foreign" id="vat_lc_import_foreign" class="col-xs-12 col-sm-12 vat_lc_import_foreign form-control" placeholder="Example: 9885" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="sg_cust_liability_reversal">SG Customers Liability Reversal for Lodgement:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="sg_cust_liability_reversal" id="sg_cust_liability_reversal" class="col-xs-12 col-sm-12 sg_cust_liability_reversal form-control" placeholder="Example: 9860" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="margin_adjusted_pad">Margin Adjusted to Pad:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="margin_adjusted_pad" id="margin_adjusted_pad" class="col-xs-12 col-sm-12 margin_adjusted_pad form-control" placeholder="Example: 6910" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="swift_charge_lodgement">SWIFT Charge for Lodgement Deducted:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="swift_charge_lodgement" id="swift_charge_lodgement" class="col-xs-12 col-sm-12 swift_charge_lodgement form-control" placeholder="Example: 10001" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                            </div>
+
+                            <fieldset class="col-md-12">
+                                <h4 style="border:1px solid #000; padding:5px;width: 1108px;margin-bottom:15px;background:yellowgreen">Vat on Delivery</h4>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="port_delvry_amnt">Port Delivery Amount:</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="port_delvry_amnt" id="port_delvry_amnt" class="col-xs-12 col-sm-12 port_delvry_amnt form-control" placeholder="Example: 1000" maxlength="100" onkeypress="return isNumber(event)" />
+                                    </div>
+                                    <label class="col-sm-3 control-label no-padding-right" for="vat_delvry_amnt">VAT on Delivery:</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="vat_delvry_amnt" id="vat_delvry_amnt" class="col-xs-12 col-sm-12 vat_delvry_amnt form-control" placeholder="Example: 1050" maxlength="100" onkeypress="return isNumber(event)" />
+                                    </div>
+                                </div>
+                                <hr style="border: 1px solid yellowgreen; width:1108px" />
+                            </fieldset>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="charge_usd">Charge USD-30:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="charge_usd" id="charge_usd" class="col-xs-12 col-sm-12 charge_usd form-control" placeholder="Example: 70001" maxlength="100" onkeypress="return isNumber(event)" />
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="bank_list">LC Bank Name:</label>
+                                <div class="col-sm-3">
+                                    <select name="bank_list" id="bank_list" class="col-xs-12 bank_list col-sm-12 form-control select_search">
+                                        <option value="">Select Bank Name</option>
+                                       
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="bankbanch_list">LC Bank Branch Name:</label>
+                                <div class="col-sm-3">
+                                    <select name="bankbanch_list" id="bankbanch_list" class="col-xs-12 col-sm-12 bankbanch_list form-control select_search">
+                                        <option value="">Select Bank Branch </option>
+                                       
+                                    </select>
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right requiredicon" for="delvry_date">Delivery Date:</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input class="form-control date_picker delvry_date" type="text" id="delvry_date" name="delvry_date" data-date-format="dd/mm/yyyy" placeholder="Example: 10/12/2018" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="lcImage">LC Image: </label>
+                                <div class="col-sm-3">
+                                    <label for="lcImage">
+                                        <img id="lcImageSource" style="width: 210px;height:126px;border: 1px solid #ddd;padding:3px;cursor:pointer;">
+                                        <i class="fa fa-plus" id="upload_icon" style="position: relative;left: -116px;"></i>
+                                        <input type="file" id="lcImage" style="display:none" accept="image/*" onchange="checkPhoto(this)" />
+                                    </label>
+                                    <input type="hidden" id="lc_image_value" value="">
+                                </div>
+                                @*<label class="col-sm-3 control-label no-padding-right" for="lc_autho_status">LC Authorization Status:</label>
+                                <div class="col-sm-3">
+                                    <select name="lc_autho_status" id="lc_autho_status" class="form-control lc_autho_status" disabled style="background:#FFFF00">
+                                        <option value="Unauthorize" selected>No</option>
+                                        <option value="Authorize">Yes</option>
+                                    </select>
+                                </div>*@
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-success" id="btnSave"><i class="fa fa-check-square-o"></i> Save</button>
+                                    <button type="submit" id="btnReset" class="btn btn-rounded btn-sm btn-purple"><span class="glyphicon glyphicon-refresh"></span> Clear</button>
+                                    <button type="submit" id="btnDelete" class="btn btn-rounded btn-sm btn-danger" onclick="deleteData();" style="display:none"><i class="fa fa-trash"></i> Delete</button>
+                                    @using (Html.BeginForm("LCReportDownload", "LCReport", FormMethod.Post, new { @style = "display:inline", target = "_blank" }))
+                                    {
+                                        <input type="hidden" name="LC_No" id="LC_No" class="LC_No" value="" />
+                                        <input type="hidden" name="lc_date" id="lc_date" class="lc_date" value="" />
+                                        <button type="submit" id="btnReport" class="btn btn-rounded btn-sm btn-primary" style="display:none" target="_blank"><i class="fa fa-file-pdf-o"></i> Report</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <h4 style="border:1px solid #ddd; padding:5px;margin-bottom:0px;background:yellowgreen" class="fiber_sale_detail">Indent Detail Entry</h4>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-hover table-condensed table_data">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th><input type="checkbox" class="check_all_Table_row" value="0" /></th>
+                                    <th>Item Description <span style="color:red">*</span></th>
+                                    <th>Measurement Unit <span style="color:red">*</span></th>
+                                    <th>Currency <span style="color:red">*</span></th>
+                                    <th>Conversion Rate <span style="color:red">*</span></th>
+                                    <th>Item Rate <span style="color:red">*</span></th>
+                                    <th>Item Quantity <span style="color:red">*</span></th>
+                                    <th>Total Amount</th>
+                                    <th class="hidden"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body" class="table_body">
+                                <tr class="detail_target_field">
+                                    <td class="hidden"><input type="hidden" id="lc_detail_id" class="form-control lc_detail_id" readonly="readonly" value="0" /></td>
+                                    <td><input type="checkbox" class="thisCheckTableRow this_check" name="thisCheckTableRow" onclick="checkSingleRow(1);" value="0" /></td>
+                                    <td>
+                                        <select name="purchase_item_code" id="purchase_item_code" class="form-control purchase_item_code select_search" onchange="itemChange(1);">
+                                            <option value="">Select Item</option>
+                                           
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="unit" id="unit" class="form-control unit select_search" disabled>
+                                            <option value="">Select Measurement Unit</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="currency" id="currency" class="form-control currency select_search">
+                                            <option value="">Select Currency</option>
+                                           
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="convert_rate" id="convert_rate" class="form-control convert_rate placeholder_left input_right calculation" placeholder="Conversion Rate" value="0" onkeypress="return isNumber(event)"></td>
+                                    <td><input type="text" name="item_rate" id="item_rate" class="form-control item_rate placeholder_left input_right calculation" placeholder="Item Rate" value="0" onkeypress="return isNumber(event)"></td>
+                                    <td><input type="text" name="quantity" id="quantity" class="form-control quantity placeholder_left input_right calculation" placeholder="Quantity" value="0" onkeypress="return isNumber(event)"></td>
+                                    <td><input type="text" name="total_amount" id="total_amount" class="form-control total_amount placeholder_left input_right" placeholder="Total Amount" value="0" onkeypress="return isNumber(event)" disabled></td>
+                                    <td class="hidden"><input type="hidden" name="detail_row_status" id="detail_row_status" class="form-control detail_row_status" value="1" disabled></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-xs-12 col-md-3 col-md-3 col-lg-3'>
+                    <button type="button" id="deleteTableRow" class="btn btn-rounded btn-sm btn-danger deleteTableRow"><i class="fa fa-minus"></i> Delete</button>
+                    <button type="button" id="addTableRow" class="btn btn-rounded btn-sm btn-info addTableRow"><i class="fa fa-plus"></i> Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #table_data .select2-container {
+        width: 300px !important;
+    }
+
+    #table_data input[type="text"] {
+        width: 200px !important;
+    }
+</style>
+
+
+
+

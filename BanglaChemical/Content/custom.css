@@ -1,0 +1,153 @@
+body {
+     overflow-x: hidden;
+}
+.nav-list > li:last-child {
+    border-top-width: .1px;
+    border-bottom-width: .1px;
+}
+.footer_link:hover{
+    text-decoration: none;
+}
+tfoot td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    font-weight: bold;
+}
+
+#action::after { 
+    display: none;
+    cursor: default;
+}
+.sidebar .sidebar-toggle:before {
+    display: block;
+    height: 0;
+    border-top: 0px;
+    border-color: inherit;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 13px;
+}
+
+table {
+    width: 100% !important;
+}
+
+#table_data th {
+    text-align: left;
+    /*padding: 8px 10px;*/
+}
+.modal-footer {
+    text-align: center;
+}
+.modal-content {
+    border-radius: 2px;
+}
+#table_data input[type="text"]:disabled {
+    background-color: transparent !important;
+    border: none;
+}
+.sweet-alert button.cancel {
+    background-color: #ff0000 !important;
+    margin-right: 10px !important;
+}
+/*#edit_form label {
+    text-align: right !important;
+}*/
+.navbar {
+    border-radius: 0px;
+    min-height: 0px;
+}
+.dataTables_wrapper .dataTables_filter input {
+    width: 158px;
+}
+.select2-container {
+        width:100%!important;
+    }
+.select2-selection--single {
+    border-radius:0px!important;
+}
+
+.input-group-addon{
+    cursor:pointer!important;
+}
+
+/*.sweet-alert{
+    margin-left: -100px!important;
+    margin-top: -240px!important;
+}*/
+
+.placeholder_left::placeholder {
+    text-align:left;
+}
+.input_right{
+    text-align:right;
+}
+
+ #action{
+    width:250px!important;
+}
+
+input[type=text],input[type=email],textarea{
+    color:#000!important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    color:#000!important;
+}
+.form-group input:disabled, .form-group input[disabled] {
+    color:#000!important;
+}
+select{
+    color:#000!important;
+}
+
+/*@media (min-width: 768px) .modal-dialog {
+    width:900px;
+}*/
+
+@media only screen and (min-width: 768px) {
+    
+    .modal-dialog {
+        width: 900px;
+    }
+       
+}
+
+label.error {
+    color: red!important;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+    float: left;
+}
+
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red!important;
+}
+
+fieldset {
+	border: 1px solid #0099FF !important;
+	margin: 0;
+	padding: 10px;       
+	position: relative;
+	border-radius:4px;
+	padding-left:10px!important;
+    margin-bottom:20px;
+}	
+	
+legend {
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom: 0px; 
+	width: 35%; 
+	border: 1px solid #0099FF;
+	border-radius: 4px; 
+	padding: 5px 5px 5px 10px; 
+	background-color: #ffffff;
+}
+
+.sweet-alert fieldset{
+    display:none;
+}

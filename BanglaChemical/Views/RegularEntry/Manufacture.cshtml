@@ -1,0 +1,120 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Manufacture";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Manufacture
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Manufacture Information
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-horizontal" id="form_input" role="form">
+
+                        <div class="form-group">
+                            <input type="hidden" name="msr_unit_id" id="msr_unit_id" class="col-xs-12 col-sm-12 msr_unit_id hidden" value="">
+                            <input type="hidden" name="msr_unit_code" id="msr_unit_code" class="col-xs-12 col-sm-12 msr_unit_code hidden" value="">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="manufacture"> Manufacture: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="manufacture" id="manufacture" class="col-xs-12 col-sm-12 manufacture" value="" maxlength="50" placeholder="Manufacture">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" class="btn btn-sm btn-success" id="saveData"><i class="fa fa-check-square-o"></i> Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-condensed table-hover data_table">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th>Manufacture</th>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th class="text-center" id="action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit_form" class="modal edit_form" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="blue bigger">
+                                Manufacture
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Manufacture Edit
+                                </small>
+                            </h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-horizontal" id="form_input" role="form">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_manufacture"> Manufacture: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_manufacture" id="edit_manufacture" class="col-xs-12 col-sm-12 edit_manufacture" value="" maxlength="50" placeholder="Manufacture">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <input type="hidden" id="editing_row" />
+                                            <div class="space-4"></div>
+
+                                            <button class="btn btn-sm btn-danger" data-dismiss="modal">
+                                                <i class="ace-icon fa fa-times"></i> Cancel
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" id="updateMsrUnitInfo">
+                                                <i class="ace-icon fa fa-check"></i> Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

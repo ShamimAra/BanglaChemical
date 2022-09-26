@@ -1,0 +1,247 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.SetUp
+@using BanglaChemical.Models.UserManagement
+@{
+    List<MenuModel> menuList = new List<MenuModel>();
+   
+    if (ViewBag.menuList != null)
+    {
+        menuList = ViewBag.menuList;
+    }
+
+}
+
+<div id="sidebar" class="sidebar responsive ace-save-state">
+    <ul class="nav nav-list">
+        <li class="">
+            <a href="/Home/Dashboard">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        
+        <li class="">
+            <a href="/Supplier/Supplier">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Supplier </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Customer/Customer">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Customer </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/MeasurementUnit/MeasurementUnit">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Measurement Unit </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Currency/Currency">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Currency </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Manufacture/Manufacture">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Manufacture </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Country/Country">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Country </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Item/Item">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Item </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/CustomerInquiry/CustomerInquiry">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Customer Inquiry </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/CustomerInquiryToSupplier/CustomerInquiryToSupplier">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Inquiry to Supplier</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/CustomerOffer/CustomerOffer">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Customer Offer</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/SupplierOrder/SupplierOrder">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Supplier Order</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/Indent/Indent">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Indent</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/DraftLC/DraftLC">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Draft L/C</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/OriginalLC/OriginalLC">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Original L/C</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/LCAmendment/LCAmendment">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">L/C Amendment</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/ShipmentAdvisement/ShipmentAdvisement">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Shipment Booking</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/ShippingDocument/ShippingDocument">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Shipping Document</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li>
+            <a href="/CommissionSettlement/CommissionSettlement">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text">Commission Settlement</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        @*<li class="">
+            <a href="/SupplierToCustomer/SupplierToCustomer">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Supplier To Customer </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+        <li class="">
+            <a href="/Offer/Offer">
+                <i class="menu-icon fa fa-align-justify"></i>
+                <span class="menu-text"> Offer </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>*@
+        @{
+            for (int i = 0; i < menuList.Count; i++)
+            {
+                if (menuList[i].PARENT_MENU_ITEM_ID.Equals("0"))
+                {
+                    <li class="hidden">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="@menuList[i].MENU_ICON"></i>
+                            <span class="menu-text">
+                                @menuList[i].MENU_DESCRIPTION
+                            </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            @for (int j = 0; j < menuList.Count; j++)
+                              {
+                                if (menuList[j].PARENT_MENU_ITEM_ID.Equals(menuList[i].MENU_ITEM_ID))
+                                {
+
+                                string idName = "smenu_" + @j;
+                                    <li class="">
+                                        <a href="#" class="dropdown-toggle" style="font-size: 13px;">
+                                            <i class="@menuList[j].MENU_ICON"></i>
+                                            @menuList[j].MENU_DESCRIPTION
+                                            <b class="arrow fa fa-angle-down"></b>
+                                        </a>
+
+                                        <b class="arrow"></b>
+
+                                        <ul class="submenu">
+                                            @for (int k = 0; k < menuList.Count; k++)
+                                            {
+
+                                                if (menuList[k].PARENT_MENU_ITEM_ID.Equals(menuList[j].MENU_ITEM_ID))
+                                                {
+                                                    <li class="">
+                                                        <a href="/@menuList[k].MENU_URL" style="font-size:12px;">
+                                                            <i class="menu-icon fa fa-caret-right"></i>
+                                                            @menuList[k].MENU_DESCRIPTION
+                                                        </a>
+                                                        <b class="arrow"></b>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                    }
+                                }
+                        </ul>
+                    </li>
+                }
+            }
+        }
+        <li class="sidebar-toggle sidebar-collapse fullScreenMenu" id="sidebar-collapse" style="text-align: left !important">
+            <a href="#">
+                <i class="menu-icon fa fa-th-large"></i> 
+                <span class="menu-text">
+                    Full Screen
+                </span>
+            </a>
+        </li>
+     </ul>
+ 
+</div>
+

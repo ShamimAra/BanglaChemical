@@ -1,0 +1,275 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@using BanglaChemical.Models.UserManagement
+@using BanglaChemical.Models.SetUp
+@{
+    ViewBag.Title = "Supplier";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Supplier
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Supplier Information
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-horizontal" id="form_input" role="form">
+
+                        <div class="form-group">
+                            <input type="hidden" name="sup_id" id="sup_id" class="col-xs-12 col-sm-12 sup_id hidden" value="">
+                            <input type="hidden" name="sup_code" id="sup_code" class="col-xs-12 col-sm-12 sup_code hidden" value="">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="country_desc"> Country Name: </label>
+                            <div class="col-sm-3">
+                                <select name="country_desc" id="country_desc" class="col-xs-12 col-sm-12 country_desc select_search">
+                                    <option value=""> Select Country</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="sup_desc"> Supplier Name: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_desc" id="sup_desc" class="col-xs-12 col-sm-12 sup_desc" value="" placeholder="Example: XYZ Corporation Ltd">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="sup_add1"> Address1: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_add1" id="sup_add1" class="col-xs-12 col-sm-12 sup_add1" value="" maxlength="50" placeholder="Example: Mohakhali DOHS">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="sup_add2"> Address2: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_add2" id="sup_add2" class="col-xs-12 col-sm-12 sup_add2" value="" placeholder="Example: Mirpur DOHS">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="sup_city"> City: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_city" id="sup_city" class="col-xs-12 col-sm-12 sup_city" value="" maxlength="50" placeholder="Example: Dhaka">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="sup_email"> Email: </label>
+                            <div class="col-sm-3">
+                                <input type="email" name="sup_email" id="sup_email" class="col-xs-12 col-sm-12 sup_email" value="" maxlength="50" placeholder="Example: abc@gmail.com">
+                                <span id="error_email"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="sup_phn"> Mobile Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_phn" id="sup_phn" class="col-xs-12 col-sm-12 sup_phn" value="" maxlength="11" placeholder="Example: 01700000000" onkeypress="return isNumber(event)">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right" for="sup_cont_person"> Contact Person: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_cont_person" id="sup_cont_person" class="col-xs-12 col-sm-12 sup_cont_person" value="" maxlength="50" placeholder="Example: Md.Kamal Hossain">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="sup_cont_person_phn"> Contact Person Mobile Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sup_cont_person_phn" id="sup_cont_person_phn" class="col-xs-12 col-sm-12 sup_cont_person_phn" value="" maxlength="11" placeholder="Example: 01800000000" onkeypress="return isNumber(event)">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="bin_no"> BIN Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="bin_no" id="bin_no" class="col-xs-12 col-sm-12 bin_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 2547XXXXXXXX">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="tin_no"> TIN Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="tin_no" id="tin_no" class="col-xs-12 col-sm-12 tin_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 8965XXXXXXXX">
+                            </div>
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="vat_no"> VAT Registration Number: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="vat_no" id="vat_no" class="col-xs-12 col-sm-12 vat_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 4698XXXXXXXX">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="nid_no"> National ID: </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="nid_no" id="nid_no" class="col-xs-12 col-sm-12 nid_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 5552091160">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="submit" class="btn btn-sm btn-success" id="saveSupplier"><i class="fa fa-check-square-o"></i> Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="table_data" class="table table-bordered table-striped table-condensed table-hover data_table">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th>Country Name</th>
+                                    <th>Supplier Name</th>
+                                    <th>Address1</th>
+                                    <th>Address2</th>
+                                    <th>City</th>
+                                    <th>Email</th>
+                                    <th>Mobile Number</th>
+                                    <th>Contact Person</th>
+                                    <th>Contact Person Mobile Number</th>
+                                    <th>BIN Number</th>
+                                    <th>TIN Number</th>
+                                    <th>VAT Registration Number</th>
+                                    <th>National ID</th>
+                                    <th class="hidden"></th>
+                                    <th class="hidden"></th>
+                                    <th style="text-align: center; border: 1px solid #ddd;" id="action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit_form" class="modal edit_form" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content" style ="width:910px; right: 10px;">
+                        <div class="modal-header">
+                            <h4 class="blue bigger">
+                                Supplier
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Supplier Edit
+                                </small>
+                            </h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-horizontal" id="form_input" role="form">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_country_desc"> Country Name: </label>
+                                            <div class="col-sm-3">
+                                                <select name="edit_country_desc" id="edit_country_desc" class="col-xs-12 col-sm-12 edit_country_desc select_search">
+                                                    <option value=""> Select Country</option>
+                                                    
+                                                </select>
+                                            </div>
+
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_sup_desc"> Supplier Name: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_desc" id="edit_sup_desc" class="col-xs-12 col-sm-12 edit_sup_desc" value="" placeholder="Example: XYZ Corporation Ltd">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_sup_add1"> Address1: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_add1" id="edit_sup_add1" class="col-xs-12 col-sm-12 edit_sup_add1" value="" maxlength="50" placeholder="Example: Mohakhali DOHS">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_sup_add2"> Address2: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_add2" id="edit_sup_add2" class="col-xs-12 col-sm-12 edit_sup_add2" value="" placeholder="Example: Mirpur DOHS">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_sup_city"> City: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_city" id="edit_sup_city" class="col-xs-12 col-sm-12 edit_sup_city" value="" maxlength="50" placeholder="Example: Dhaka">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_sup_email"> Email: </label>
+                                            <div class="col-sm-3">
+                                                <input type="email" name="edit_sup_email" id="edit_sup_email" class="col-xs-12 col-sm-12 edit_sup_email" value="" maxlength="50" placeholder="Example: abc@gmail.com">
+                                                <span id="error_edit_email"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_sup_phn"> Mobile Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_phn" id="edit_sup_phn" class="col-xs-12 col-sm-12 edit_sup_phn" value="" maxlength="11" placeholder="Example: 01700000000" onkeypress="return isNumber(event)">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_sup_cont_person"> Contact Person: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_cont_person" id="edit_sup_cont_person" class="col-xs-12 col-sm-12 edit_sup_cont_person" value="" maxlength="50" placeholder="Example: Md.Kamal Hossain">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="edit_sup_cont_person_phn"> Contact Person Mobile Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_sup_cont_person_phn" id="edit_sup_cont_person_phn" class="col-xs-12 col-sm-12 edit_sup_cont_person_phn" value="" maxlength="11" placeholder="Example: 01800000000" onkeypress="return isNumber(event)">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_bin_no"> BIN Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_bin_no" id="edit_bin_no" class="col-xs-12 col-sm-12 edit_bin_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 2547XXXXXXXX">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_tin_no"> TIN Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_tin_no" id="edit_tin_no" class="col-xs-12 col-sm-12 edit_tin_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 8965XXXXXXXX">
+                                            </div>
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_vat_no"> VAT Registration Number: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_vat_no" id="edit_vat_no" class="col-xs-12 col-sm-12 edit_vat_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 4698XXXXXXXX">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right requiredicon" for="edit_nid_no"> National ID: </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="edit_nid_no" id="edit_nid_no" class="col-xs-12 col-sm-12 edit_nid_no" value="" onkeypress="return isNumber(event)" placeholder="Example: 5552091160">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <input type="hidden" id="editing_row" />
+                                            <div class="space-4"></div>
+
+                                            <button class="btn btn-sm btn-danger" data-dismiss="modal">
+                                                <i class="ace-icon fa fa-times"></i> Cancel
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" id="updateSupplier">
+                                                <i class="ace-icon fa fa-check"></i> Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@using System.Data
+@using System.Collections
+@using Connection
+@using System.Data
+@using System.Collections
+@using Connection
+@using BanglaChemical.Models
+@{
+    string userName = string.Empty;
+    DataTable dtLoginData = new DataTable();
+    if (Session["dtLoginData"] != null)
+    {
+        dtLoginData = (DataTable)Session["dtLoginData"];
+    }
+
+    if (dtLoginData.Rows.Count > 0)
+    {
+        ViewBag.userName = Convert.ToString(dtLoginData.Rows[0]["USER_NAME"]);
+    }
+}
+<div id="navbar" class="navbar navbar-default ace-save-state">
+    <div class="navbar-container ace-save-state" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar" style="z-index:99999">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left col-md-4">
+            <a href="/Home/Dashboard" class="navbar-brand" target="_self">
+                <img src="@Url.Content("~/Image/BanglaChemicalLogo.png")" class="img-responsive" style="height:44px;width:100px">
+            </a>
+        </div>
+        <div class="navbar-header col-md-4">
+               <h2 style="color:#0077b4;font-weight:bold" class="text-center">Bangla Chemical</h2>
+        </div>
+
+        <div class="navbar-buttons navbar-header col-md-4 pull-right" role="navigation" style="padding-right: 0px">           
+            <ul class="nav ace-nav pull-right">
+                <li class="purple dropdown-modal" style="height: 100%;">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="margin-top:-1px">
+                        <i class="ace-icon fa fa-user"></i>
+                        <span>Welcome to @ViewBag.userName</span>
+                    </a>
+
+                    <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+
+                        <li class="dropdown-content">
+                            <ul class="dropdown-menu dropdown-navbar navbar-pink">
+                                <li>
+                                    <a href="@Url.Action("ChangePassword","Home")">
+                                        <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="fa fa-cog"></i>
+                                                Change Password
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("LogOff","Home")">
+                                        <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="fa fa-sign-out"></i>
+                                                Logout
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
